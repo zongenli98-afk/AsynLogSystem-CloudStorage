@@ -89,7 +89,7 @@ Win的话会麻烦不少。提前准备工具：
 安装perl时，选择Complete安装选项，之后直接一路next就好!
 
 ```bash
-# 使用以下命令
+# 使用以下命令验证是否成功安装
 nasm --version  
 perl --version
 ```
@@ -128,7 +128,7 @@ nmake /f Makefile.nmake OPENSSL_DIR=D:\software\openssl_output
 
 ## 运行方式
 
-走到src目录下的server目录，`make`即可生成test可执行文件。把log_stsytem目录下的backlog目录中的ServerBackupLog.cpp和hpp文件拷贝置另外一个服务器或当前服务器作为备份日志服务器，使用命令`g++ ServerBackupLog.cpp`即可启动备份日志服务器，随后`./test`即可运行整个服务。
+走到src目录下的server目录，`make`即可生成test可执行文件。把log_stsytem目录下的backlog目录中的ServerBackupLog.cpp和hpp文件拷贝置另外一个服务器或当前服务器作为备份日志服务器，使用命令`g++ ServerBackupLog.cpp`生成可执行文件，`./a.out 8080` 即可启动备份日志服务器，随后`./test`即可运行整个服务。
 
 启动后，默认占用服务器8081端口。
 
