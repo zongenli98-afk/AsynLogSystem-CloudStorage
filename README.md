@@ -70,8 +70,10 @@ nc 127.1 9995 //若安装成功，该终端会返回一个Hello, World!
 
 克隆下来包含bundle.cpp与bundle.h即可使用 
 
-### 客户端Win
+### web端
+ip+port即可访问
 
+### 客户端Win(可选，与服务端实现类似)
 #### 1. libevent
 
 Win的话会麻烦不少。提前准备工具：
@@ -129,6 +131,8 @@ nmake /f Makefile.nmake OPENSSL_DIR=D:\software\openssl_output
 ## 运行方式
 
 走到src目录下的server目录，`make`即可生成test可执行文件。把log_stsytem目录下的backlog目录中的ServerBackupLog.cpp和hpp文件拷贝置另外一个服务器或当前服务器作为备份日志服务器，使用命令`g++ ServerBackupLog.cpp`生成可执行文件，`./a.out 8080` 即可启动备份日志服务器，随后`./test`即可运行整个服务。
+打开浏览器输入ip+port即可访问该服务，
+或按照上方可选客户端实现，启动客户端后添加文件到对应文件夹即可上传文件
 
 启动后，默认占用服务器8081端口。
 
