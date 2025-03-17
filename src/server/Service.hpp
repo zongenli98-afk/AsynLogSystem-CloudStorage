@@ -127,7 +127,12 @@ namespace storage
                 return;
             }
             std::string content(len, 0);
-            evbuffer_copyout(buf, (void *)content.c_str(), len);
+            if (-1 == evbuffer_copyout(buf, (void *)content.c_str(), len))
+            {
+                mylog::GetLogger("asynclogger")->Error("evbuffer_copyout error");
+                evhttp_send_reply(req, HTTP_INTERNAL, NULL, NULL);
+                return;
+            }
 
             // 获取文件名
             const char *filename = evhttp_find_header(req->input_headers, "FileName");
@@ -213,7 +218,7 @@ namespace storage
 
             // 2. 根据存储信息，组织html文件数据
             std::stringstream ss;
-            ss << "<html><head><title>Download</title></head>";
+            ss << "<html><head><title>FILELIST</title></head>";
             ss << "<body><h1>Download</h1><table>";
             for (auto &a : arry)
             {
@@ -224,7 +229,48 @@ namespace storage
                 ss << "<td align='right'>" << a.fsize_ / 1024 << "k</td>";
                 ss << "</tr>";
             }
-            ss << "</table></body></html>";
+            ss << "</table>";
+
+            // 添加文件上传表单
+            ss << "<h1>Upload</h1>";
+            ss << "<form id='uploadForm'>";
+            ss << "<input type='file' id='fileInput' name='file'/>";
+            ss << "<select id='storageType'>";
+            ss << "<option value='deep'>Deep Storage</option>";
+            ss << "<option value='low'>Low Storage</option>";
+            ss << "</select>";
+            ss << "<button type='button' onclick='uploadFile()'>Upload</button>";
+            ss << "</form>";
+
+            // 动态注入后端地址（此处假设从服务器配置获取）
+            std::string backendUrl = "http://127.0.0.1:8081"; // 实际应从配置读取
+            ss << "<script>";
+            ss << "const config = { backendUrl: '" << backendUrl << "' };";
+            ss << "function uploadFile() {";
+            ss << "    var fileInput = document.getElementById('fileInput');";
+            ss << "    var storageType = document.getElementById('storageType').value;";
+            ss << "    var file = fileInput.files[0];";
+            ss << "    if (!file) { alert('Please select a file'); return; }";
+            ss << "    var formData = new FormData();";
+            ss << "    formData.append('file', file);";
+            ss << "    var xhr = new XMLHttpRequest();";
+            ss << "    var uploadUrl = config.backendUrl + '/upload';"; // 动态拼接接口地址
+            ss << "    xhr.open('POST', uploadUrl, true);";
+            ss << "    xhr.setRequestHeader('StorageType', storageType);";
+            ss << "    xhr.setRequestHeader('FileName', file.name);";
+            ss << "    xhr.onload = function() {";
+            ss << "        if (xhr.status === 200) {";
+            ss << "            alert('File uploaded successfully');";
+            ss << "            location.reload();";
+            ss << "        } else {";
+            ss << "            alert('Upload failed');";
+            ss << "        }";
+            ss << "    };";
+            ss << "    xhr.send(formData);";
+            ss << "}";
+            ss << "</script>";
+
+            ss << "</body></html>";
             // 获取请求的输出evbuffer
             struct evbuffer *buf = evhttp_request_get_output_buffer(req);
             auto response_body = ss.str();
