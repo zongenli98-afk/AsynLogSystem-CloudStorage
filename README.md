@@ -50,7 +50,7 @@ sudo apt-get install libssl-dev
 wget https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
 tar xvf libevent-2.1.12-stable.tar.gz  //解压下载的源码压缩包，目录下会生成一个libevent-2.1.12-stable目录
 cd libevent-2.1.12-stable                 //切换到libevent-2.1.12-stable目录,(安装步骤可以查看README.md文件)
-./configure                                       //生成Makefile文件，用ll Makefile可以看到Makefile文件已生成
+./configure                                     //生成Makefile文件，用ll Makefile可以看到Makefile文件已生成
 make                                          //编译
 sudo make install                            //安装
 
@@ -70,11 +70,14 @@ nc 127.1 9995 //若安装成功，该终端会返回一个Hello, World!
 源码链接：https://github.com/r-lyeh-archived/bundle
 
 克隆下来包含bundle.cpp与bundle.h即可使用 
+#### 4. cpp-base64
+`git clone https://github.com/ReneNyffenegger/cpp-base64.git`
+之后把该目录内的base64.h和.cpp文件拷贝到本项目文件server/src/下即可使用
 
 ### web端
 ip+port即可访问
 
-### 客户端Win(可选，与服务端实现类似)
+### 客户端Win(可选实现，与服务端实现类似)
 #### 1. libevent
 
 Win的话会麻烦不少。提前准备工具：
