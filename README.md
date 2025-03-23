@@ -72,7 +72,7 @@ nc 127.1 9995 //若安装成功，该终端会返回一个Hello, World!
 克隆下来包含bundle.cpp与bundle.h即可使用 
 #### 4. cpp-base64
 `git clone https://github.com/ReneNyffenegger/cpp-base64.git`
-之后把该目录内的base64.h和.cpp文件拷贝到本项目文件server/src/下即可使用
+之后把该目录内的base64.h和.cpp文件拷贝到本项目文件src/server/下即可使用
 
 ### web端
 ip+port即可访问
