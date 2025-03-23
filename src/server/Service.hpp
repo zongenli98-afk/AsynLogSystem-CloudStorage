@@ -289,7 +289,7 @@ namespace storage
             //替换服务器地址进hrml
             templateContent = std::regex_replace(templateContent,
                                                  std::regex("\\{\\{BACKEND_URL\\}\\}"),
-                                                 "http://localhost:8081"); // 把这里的url替换成自己服务器的访问地址
+                                                "http://"+storage::Config::GetInstance()->GetServerIp()+":"+std::to_string(storage::Config::GetInstance()->GetServerPort()));
             // 获取请求的输出evbuffer
             struct evbuffer *buf = evhttp_request_get_output_buffer(req);
             auto response_body = templateContent;
