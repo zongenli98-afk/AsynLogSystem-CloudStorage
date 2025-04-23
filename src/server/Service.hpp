@@ -229,7 +229,7 @@ namespace storage
 
                 // 从路径中解析存储类型（示例逻辑，需根据实际路径规则调整）
                 std::string storage_type = "low";
-                if (file.storage_path_.find("/deep/") != std::string::npos)
+                if (file.storage_path_.find("deep") != std::string::npos)
                 {
                     storage_type = "deep";
                 }
