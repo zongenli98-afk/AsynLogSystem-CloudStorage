@@ -115,8 +115,8 @@ namespace storage
 
             // 序列化
             std::string body;
-            mylog::GetLogger("asynclogger")->Info("new message for StorageInfo:%s", body.c_str());
             JsonUtil::Serialize(root, &body);
+            mylog::GetLogger("asynclogger")->Info("new message for StorageInfo:%s", body.c_str());    //打印序列化后的文件信息
 
             // 写入文件
             FileUtil f(storage_file_);
