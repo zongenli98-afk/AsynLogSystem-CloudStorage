@@ -72,8 +72,7 @@ namespace mylog
         mylog::Buffer buffer_consumer_;
         std::condition_variable cond_productor_;
         std::condition_variable cond_consumer_;
-        std::thread thread_;
-
         functor callback_; // 回调函数，用来告知工作器如何落地
+        std::thread thread_;
     };
 } // namespace mylog
