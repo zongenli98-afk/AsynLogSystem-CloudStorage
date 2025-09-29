@@ -6,6 +6,14 @@ using std::endl;
 
 ThreadPool* tp=nullptr;
 mylog::Util::JsonData* g_conf_data;
+/**
+ * @test Tests the logging functionality by generating log messages of various severity levels.
+ *
+ * This function iterates twice, and in each iteration, it logs messages with increasing counters
+ * using different log levels: Info, Warn, Debug, Error, and Fatal. The logger used is named "asynclogger".
+ *
+ * Log messages are formatted as "测试日志-%d", where %d is replaced by the current counter value.
+ */
 void test() {
     int cur_size = 0;
     int cnt = 1;

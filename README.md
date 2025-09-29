@@ -197,8 +197,3 @@ Or run the optional Windows client and upload files to trigger uploads.
 - `log_system/logs_code/` — logging configuration (`config.conf`)
 - `log_system/backlog/` — backup log server sources (`ServerBackupLog.cpp`, `.hpp`)
 
----
-
-If you want, I can:
-- Save this generated Markdown into `README.md` in your repo and create a commit.
-- Or produce a shorter or translated Chinese version.
